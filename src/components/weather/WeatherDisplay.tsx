@@ -1,35 +1,64 @@
-import React from 'react'
-import styled from 'styled-components'
-import { WeatherData } from '../../interfaces/app_interfaces'
-import WeatherCard from './WeatherCard'
+import React from "react";
+import styled from "styled-components";
+import { WeatherData } from "../../interfaces/app_interfaces";
+import WeatherCard from "./WeatherCard";
 
 interface Props {
-    weatherData: WeatherData | undefined
+	weatherData: WeatherData | undefined;
 }
 
-const CardWrapper = styled.div`
-    display: flex; 
-    justify-content: space-evenly; 
-`
+const WeatherDisplayWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
 
-const WeatherDisplay: React.FC<Props> = ({weatherData}) => {
+const Time = styled.div`
+	font-size: 0.8rem;
+`;
 
-    let iconPath
-    iconPath = `http://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`
-    console.log(weatherData?.weather)
+const TempWrapper = styled.div`
+	display: flex;
+	justify-content: space-evenly;
+`;
 
-    return (
-        <div>
-            <h2>{weatherData?.name}</h2>
-            <h3>{weatherData?.main.temp}</h3>
-            <CardWrapper>
-                <WeatherCard title="Feels Like" temp={weatherData?.main.feels_like} />
-                <WeatherCard title="Lowest Temperature" temp={weatherData?.main.temp_min} />
-                <WeatherCard title="Highest temperature" temp={weatherData?.main.temp_max} />
-            </CardWrapper>
-            <img src={iconPath} alt="" />
-        </div>
-    )
-}
+const WeatherDisplay: React.FC<Props> = ({ weatherData }) => {
+	let iconPath;
+	iconPath = `http://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`;
 
-export default WeatherDisplay
+	const date = new Date().toLocaleDateString("en-US", {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	});
+
+	const time = new Date().toLocaleTimeString("en-US");
+
+	console.log(date);
+	console.log(time);
+
+	return (
+		<WeatherDisplayWrapper>
+			<img src={iconPath} alt={weatherData?.name} />
+			<h2>{weatherData?.name}</h2>
+			<Time>{`${date} | ${time}`}</Time>
+			<p>{weatherData?.weather[0].description}</p>
+			<TempWrapper>
+				<WeatherCard
+					title="Lowest Temperature"
+					temp={weatherData?.main.temp_min}
+				/>
+				<WeatherCard
+					title="Current Temperature"
+					temp={weatherData?.main.temp}
+				/>
+				<WeatherCard
+					title="Highest Temperature"
+					temp={weatherData?.main.temp_max}
+				/>
+			</TempWrapper>
+		</WeatherDisplayWrapper>
+	);
+};
+
+export default WeatherDisplay;
