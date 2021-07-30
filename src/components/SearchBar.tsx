@@ -1,35 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
-interface Props {
-	setSearch: (text: string) => void;
-}
+import { AiOutlineSearch } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { fetchWeatherData } from "../store/weatherSlice";
 
 const Input = styled.input`
-	background-color: rgba(255, 255, 255, 0.4);
+	background-color: transparent;
 	border: 2px solid transparent;
 	border-radius: 2em;
+	width: 100%;
+	outline: none;
 `;
 
 const SearchWrapper = styled.div`
 	width: 100%;
+	background-color: rgb(255, 255, 255);
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: 1rem;
-	margin-bottom: 1rem;
+	padding: 0.5rem 1rem;
+	border-radius: 3em;
 `;
 
-const SearchBar: React.FC<Props> = (props) => {
+const Form = styled.form`
+	width: 100%;
+`;
+
+const SearchBar: React.FC = () => {
+	const [citySearch, setCitySearch] = useState<string>("");
+	const dispatch = useDispatch();
+	const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		console.log("searched");
+		dispatch(fetchWeatherData(citySearch));
+	};
+
 	return (
 		<SearchWrapper>
-			<label htmlFor="searchBar">Search for a City!</label>
-			<Input
-				type="text"
-				id="searchBar"
-				onChange={(event) => props.setSearch(event?.target.value)}
-				autoComplete="off"
-			/>
+			<AiOutlineSearch />
+			<Form onSubmit={submitHandler}>
+				<Input
+					type="text"
+					id="searchBar"
+					value={citySearch}
+					onChange={(event) => setCitySearch(event.target.value)}
+					autoComplete="off"
+					placeholder="Search for a City!"
+				/>
+			</Form>
 		</SearchWrapper>
 	);
 };

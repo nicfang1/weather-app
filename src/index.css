@@ -12,11 +12,9 @@ html {
 
 body {
 	margin: 0;
-	font-family: "Poppins";
 	color: black;
-	height: 100vh;
-	padding: 5rem 20rem;
 	background-color: rgb(200, 220, 231);
+	padding: 5rem 0;
 }
 
 code {

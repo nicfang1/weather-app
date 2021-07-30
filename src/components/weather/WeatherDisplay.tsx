@@ -1,16 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { WeatherData } from "../../interfaces/app_interfaces";
+import { RootState } from "../../store/store";
 import WeatherCard from "./WeatherCard";
-
-interface Props {
-	weatherData: WeatherData | undefined;
-}
 
 const WeatherDisplayWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: white;
 `;
 
 const Time = styled.div`
@@ -22,7 +20,10 @@ const TempWrapper = styled.div`
 	justify-content: space-evenly;
 `;
 
-const WeatherDisplay: React.FC<Props> = ({ weatherData }) => {
+const WeatherDisplay: React.FC = () => {
+	let weatherData = useSelector((state: RootState) => state.weather);
+
+	console.log(weatherData);
 	let iconPath;
 	iconPath = `http://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`;
 
@@ -36,6 +37,10 @@ const WeatherDisplay: React.FC<Props> = ({ weatherData }) => {
 
 	console.log(date);
 	console.log(time);
+
+	if (weatherData.name === "") {
+		return <div></div>;
+	}
 
 	return (
 		<WeatherDisplayWrapper>
