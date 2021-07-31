@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { fetchWeatherData } from "../store/weatherSlice";
+import { fetchWeatherData } from "../store/currentWeatherSlice";
 import { fetchForcastedData } from "../store/forcastedWeatherSlice";
 
 const Input = styled.input`

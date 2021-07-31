@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getCurrentWeatherData } from "../api/fetch-weather-data";
-import { CurrentWeatherData } from "../interfaces/weather";
+import { CurrentWeatherData } from "../interfaces/weather-interface";
 
 const initialState: CurrentWeatherData = {
 	weather: [{ description: "", main: "", id: 0, icon: "" }],
@@ -28,15 +28,11 @@ export const weatherSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder
-			.addCase(fetchWeatherData.fulfilled, (state, action) => {
-				state.weather = action.payload.weather;
-				state.name = action.payload.name;
-				state.main = action.payload.main;
-			})
-			.addCase(fetchWeatherData.rejected, (state, action) => {
-				console.log("rejected");
-			});
+		builder.addCase(fetchWeatherData.fulfilled, (state, action) => {
+			state.weather = action.payload.weather;
+			state.name = action.payload.name;
+			state.main = action.payload.main;
+		});
 	},
 });
 

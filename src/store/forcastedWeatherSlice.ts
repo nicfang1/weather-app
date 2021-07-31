@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getWeatherForecast } from "../api/fetch-weather-data";
-import { TransformedForcastedData } from "../interfaces/weather";
+import { TransformedForcastedData } from "../interfaces/weather-interface";
 
 const initialState: TransformedForcastedData[] = [];
 

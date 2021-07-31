@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DailyForcastedWeather } from "../interfaces/weather";
+import { DailyForcastedWeather } from "../interfaces/weather-interface";
 import { convertUTCDate, convertUTCTime } from "../utils/convert-utc";
 import { iconPath } from "../utils/icon-path";
 import { v4 as uuidv4 } from "uuid";
@@ -13,7 +13,7 @@ export const getCurrentWeatherData = async (city: string | undefined) => {
 		},
 		params: {
 			q: city,
-			units: "metric",
+			units: "imperial",
 			appid: process.env.REACT_APP_OPEN_WEATHER_API_KEY,
 		},
 		responseType: "json",
@@ -31,7 +31,7 @@ export const getWeatherForecast = async (city: string | undefined) => {
 		},
 		params: {
 			q: city,
-			units: "metric",
+			units: "imperial",
 			appid: process.env.REACT_APP_OPEN_WEATHER_API_KEY,
 		},
 		responseType: "json",

@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import weatherReducer from "./weatherSlice";
+import weatherReducer from "./currentWeatherSlice";
 import forecastedWeatherReducer from "./forcastedWeatherSlice";
+import tempUnitReducer from "./tempUnitSlice";
 
 export const store = configureStore({
 	reducer: {
 		weather: weatherReducer,
 		forecastedWeather: forecastedWeatherReducer,
+		toCelcius: tempUnitReducer,
 	},
 });
 
