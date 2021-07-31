@@ -1,20 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getCurrentWeatherData } from "../api/current-weather";
+import { CurrentWeatherData } from "../interfaces/weather";
 
-interface WeatherData {
-	weather: { description: string; main: string; id: number; icon: string }[];
-	main: {
-		temp: number;
-		feels_like: number;
-		temp_min: number;
-		temp_max: number;
-		humidity: number;
-		pressure: number;
-	};
-	name: string;
-}
-
-const initialState: WeatherData = {
+const initialState: CurrentWeatherData = {
 	weather: [{ description: "", main: "", id: 0, icon: "" }],
 	main: {
 		temp: 0,

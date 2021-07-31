@@ -25,12 +25,13 @@ const CurrentTempWrapper = styled.div`
 const TempWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	margin: 0;
+	padding: 0;
 `;
 
 const WeatherDisplay: React.FC = () => {
 	let weatherData = useSelector((state: RootState) => state.weather);
 
-	console.log(weatherData);
 	let iconPath;
 	iconPath = `http://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`;
 
@@ -44,14 +45,14 @@ const WeatherDisplay: React.FC = () => {
 				<h2>Current Weather</h2>
 			</div>
 			<Wrapper>
-				<div>
+				<TempWrapper>
 					<h2>{weatherData?.name}</h2>
 					<CurrentTempWrapper>
 						<img src={iconPath} alt={weatherData?.name} />
 						<h3>{weatherData.main.temp}</h3>
 					</CurrentTempWrapper>
 					<p>{weatherData?.weather[0].description}</p>
-				</div>
+				</TempWrapper>
 				<TempWrapper>
 					<h3>Feels like {weatherData.main.feels_like}</h3>
 					<CurrentTempWrapper>
@@ -64,8 +65,8 @@ const WeatherDisplay: React.FC = () => {
 							<h3>{weatherData.main.temp_min}</h3>
 						</CurrentTempWrapper>
 					</CurrentTempWrapper>
-					<h4>Humidity {weatherData.main.humidity}</h4>
-					<h4>Pressure {weatherData.main.pressure}</h4>
+					<p>Humidity {weatherData.main.humidity}</p>
+					<p>Pressure {weatherData.main.pressure}</p>
 				</TempWrapper>
 			</Wrapper>
 		</WeatherDisplayWrapper>
