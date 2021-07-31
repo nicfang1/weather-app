@@ -33,6 +33,7 @@ const SearchBar: React.FC = () => {
 		event.preventDefault();
 		dispatch(fetchWeatherData(citySearch));
 		dispatch(fetchForcastedData(citySearch));
+		setCitySearch("");
 	};
 
 	return (

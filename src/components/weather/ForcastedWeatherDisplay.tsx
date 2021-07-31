@@ -1,30 +1,43 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 import { RootState } from "../../store/store";
+import ForcastedWeatherCard from "./ForcastedWeatherCard";
+
+const ForcastedWeatherWrapper = styled.div`
+	margin-top: 1rem;
+	background-color: white;
+	padding: 1rem 1.5rem;
+	border-radius: 2em;
+`;
+
+const Wrapper = styled.div`
+	display: flex;
+	overflow: scroll;
+	gap: 1.5rem;
+`;
 
 const ForcastedWeatherDisplay: React.FC = () => {
 	const forcastedWeatherData = useSelector(
 		(state: RootState) => state.forecastedWeather
 	);
-	console.log(forcastedWeatherData);
 
-	// if (forcastedWeatherData[0].description === undefined) {
-	// 	return <div></div>;
-	// }
+	if (forcastedWeatherData.length === 0) {
+		return <div></div>;
+	}
 
 	return (
-		<div>
-			<h3>Forcasted Weather</h3>
-			{forcastedWeatherData.map((forcastedDate) => (
-				<div key={forcastedDate.id}>
-					<h3>{forcastedDate.date}</h3>
-					<h4>{forcastedDate.time}</h4>
-					<img src={forcastedDate.icon} alt={forcastedDate.description} />
-					<p>{forcastedDate.temp}</p>
-					<p>{forcastedDate.description}</p>
-				</div>
-			))}
-		</div>
+		<ForcastedWeatherWrapper>
+			<h3>Forecasted Weather</h3>
+			<Wrapper>
+				{forcastedWeatherData.map((forcastedDate) => (
+					<ForcastedWeatherCard
+						forcastedDate={forcastedDate}
+						key={forcastedDate.id}
+					/>
+				))}
+			</Wrapper>
+		</ForcastedWeatherWrapper>
 	);
 };
 

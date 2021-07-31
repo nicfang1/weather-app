@@ -2,7 +2,6 @@ import React from "react";
 import SearchBar from "./components/SearchBar";
 import WeatherDisplay from "./components/weather/WeatherDisplay";
 import styled from "styled-components";
-import { getWeatherForecast } from "./api/current-weather";
 import ForcastedWeatherDisplay from "./components/weather/ForcastedWeatherDisplay";
 
 const Wrapper = styled.div`
@@ -11,8 +10,6 @@ const Wrapper = styled.div`
 `;
 
 const App: React.FC = () => {
-	getWeatherForecast("singapore");
-
 	return (
 		<Wrapper>
 			<h2>React Weather App</h2>

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getCurrentWeatherData } from "../api/current-weather";
+import { getCurrentWeatherData } from "../api/fetch-weather-data";
 import { CurrentWeatherData } from "../interfaces/weather";
 
 const initialState: CurrentWeatherData = {

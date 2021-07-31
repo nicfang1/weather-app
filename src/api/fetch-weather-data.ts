@@ -48,6 +48,5 @@ export const getWeatherForecast = async (city: string | undefined) => {
 			temp: forcastedDate.main.temp,
 		};
 	});
-	console.log(transformedList);
 	return transformedList;
 };

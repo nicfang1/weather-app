@@ -65,8 +65,8 @@ const WeatherDisplay: React.FC = () => {
 							<h3>{weatherData.main.temp_min}</h3>
 						</CurrentTempWrapper>
 					</CurrentTempWrapper>
-					<p>Humidity {weatherData.main.humidity}</p>
-					<p>Pressure {weatherData.main.pressure}</p>
+					<p>Humidity {weatherData.main.humidity}%</p>
+					<p>Pressure {weatherData.main.pressure}kPa</p>
 				</TempWrapper>
 			</Wrapper>
 		</WeatherDisplayWrapper>
