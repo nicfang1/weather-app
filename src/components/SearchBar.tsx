@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { fetchWeatherData } from "../store/weatherSlice";
+import { fetchForcastedData } from "../store/forcastedWeatherSlice";
 
 const Input = styled.input`
 	background-color: transparent;
@@ -30,8 +31,8 @@ const SearchBar: React.FC = () => {
 	const dispatch = useDispatch();
 	const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log("searched");
 		dispatch(fetchWeatherData(citySearch));
+		dispatch(fetchForcastedData(citySearch));
 	};
 
 	return (

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { DailyForcastedWeather } from "../interfaces/weather";
 import { convertUTCDate, convertUTCTime } from "../utils/convert-utc";
+import { iconPath } from "../utils/icon-path";
+import { v4 as uuidv4 } from "uuid";
 
 export const getCurrentWeatherData = async (city: string | undefined) => {
 	const response = await axios({
@@ -20,7 +22,7 @@ export const getCurrentWeatherData = async (city: string | undefined) => {
 	return response.request.response;
 };
 
-export const getWeatherForecast = async (city: string) => {
+export const getWeatherForecast = async (city: string | undefined) => {
 	const response = await axios({
 		method: "GET",
 		url: "https://api.openweathermap.org/data/2.5/forecast",
@@ -38,10 +40,11 @@ export const getWeatherForecast = async (city: string) => {
 	const list = await response.request.response.list;
 	const transformedList = list.map((forcastedDate: DailyForcastedWeather) => {
 		return {
+			id: uuidv4(),
 			date: convertUTCDate(forcastedDate.dt_txt),
 			time: convertUTCTime(forcastedDate.dt_txt),
 			description: forcastedDate.weather[0].description,
-			icon: forcastedDate.weather[0].icon,
+			icon: iconPath(forcastedDate.weather[0].icon),
 			temp: forcastedDate.main.temp,
 		};
 	});

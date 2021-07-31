@@ -28,3 +28,12 @@ export interface DailyForcastedWeather {
 export interface ForcastedWeatherData {
 	list: DailyForcastedWeather[];
 }
+
+export interface TransformedForcastedData {
+	id: string;
+	date: string;
+	time: string;
+	description: string;
+	icon: string;
+	temp: number;
+}
