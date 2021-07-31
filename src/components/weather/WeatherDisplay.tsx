@@ -1,43 +1,18 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { RootState } from "../../store/store";
 import { convertToCelcius } from "../../store/tempUnitSlice";
 import WeatherDetails from "./WeatherDetails";
 import { iconPath } from "../../utils/icon-path";
 import { tempConverter } from "../../utils/temp-converter";
-import { Switch, FormControl, FormLabel } from "@chakra-ui/react";
-
-const WeatherDisplayWrapper = styled.div`
-	background-color: white;
-	margin-top: 2rem;
-	border-radius: 2em;
-	padding: 1em 2em;
-`;
-
-const Wrapper = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-`;
-
-const Header = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`;
-
-const CurrentTempWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 1em;
-`;
-
-const TempWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 0;
-	padding: 0;
-`;
+import {
+	Switch,
+	Container,
+	Flex,
+	SimpleGrid,
+	Box,
+	Text,
+} from "@chakra-ui/react";
 
 const WeatherDisplay: React.FC = () => {
 	const dispath = useDispatch();
@@ -53,26 +28,29 @@ const WeatherDisplay: React.FC = () => {
 	}
 
 	return (
-		<WeatherDisplayWrapper>
-			<Header>
-				<h2>Current Weather</h2>
-				<FormControl>
-					<FormLabel htmlFor="tempUnit">Change Unit?</FormLabel>
+		<Container marginTop="1rem" border="2px" borderRadius="1em" padding="1rem">
+			<Flex justify="space-between">
+				<Text fontSize="lg" fontWeight={700}>
+					Current Weather
+				</Text>
+				<div>
 					<Switch onChange={() => dispath(convertToCelcius())} id="tempUnit" />
-				</FormControl>
-			</Header>
-			<Wrapper>
-				<TempWrapper>
+				</div>
+			</Flex>
+			<SimpleGrid columns={2} columnGap="2rem">
+				<Box>
 					<h2>{weatherData?.name}</h2>
-					<CurrentTempWrapper>
+					<Flex align="center">
 						<img
 							src={iconPath(weatherData.weather[0].icon)}
 							alt={weatherData?.name}
 						/>
-						<h3>{temp}</h3>
-					</CurrentTempWrapper>
-					<p>{weatherData?.weather[0].description}</p>
-				</TempWrapper>
+						<Box>
+							<h3>{temp}</h3>
+							<p>{weatherData?.weather[0].description}</p>
+						</Box>
+					</Flex>
+				</Box>
 				<WeatherDetails
 					feels_like={weatherData.main.feels_like}
 					temp_max={weatherData.main.temp_max}
@@ -80,8 +58,8 @@ const WeatherDisplay: React.FC = () => {
 					humidity={weatherData.main.humidity}
 					pressure={weatherData.main.pressure}
 				/>
-			</Wrapper>
-		</WeatherDisplayWrapper>
+			</SimpleGrid>
+		</Container>
 	);
 };
 

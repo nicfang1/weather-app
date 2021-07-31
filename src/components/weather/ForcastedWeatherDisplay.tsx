@@ -1,21 +1,8 @@
+import { Container, Flex, HStack, SimpleGrid, Text } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 import { RootState } from "../../store/store";
 import ForcastedWeatherCard from "./ForcastedWeatherCard";
-
-const ForcastedWeatherWrapper = styled.div`
-	margin-top: 1rem;
-	background-color: white;
-	padding: 1rem 1.5rem;
-	border-radius: 2em;
-`;
-
-const Wrapper = styled.div`
-	display: flex;
-	overflow: scroll;
-	gap: 1.5rem;
-`;
 
 const ForcastedWeatherDisplay: React.FC = () => {
 	const forcastedWeatherData = useSelector(
@@ -27,17 +14,19 @@ const ForcastedWeatherDisplay: React.FC = () => {
 	}
 
 	return (
-		<ForcastedWeatherWrapper>
-			<h3>Forecasted Weather</h3>
-			<Wrapper>
+		<Container marginTop="1rem" border="2px" borderRadius="1em" padding="1rem">
+			<Text fontSize="lg" fontWeight={700} marginBottom="0.5rem">
+				Forecasted Weather
+			</Text>
+			<Flex spacing={10} overflow="scroll">
 				{forcastedWeatherData.map((forcastedDate) => (
 					<ForcastedWeatherCard
 						forcastedDate={forcastedDate}
 						key={forcastedDate.id}
 					/>
 				))}
-			</Wrapper>
-		</ForcastedWeatherWrapper>
+			</Flex>
+		</Container>
 	);
 };
 

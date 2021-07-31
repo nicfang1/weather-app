@@ -1,22 +1,19 @@
 import React from "react";
 import SearchBar from "./components/SearchBar";
 import WeatherDisplay from "./components/weather/WeatherDisplay";
-import styled from "styled-components";
 import ForcastedWeatherDisplay from "./components/weather/ForcastedWeatherDisplay";
-
-const Wrapper = styled.div`
-	width: 80%;
-	margin: 0 auto;
-`;
+import { Container, Text } from "@chakra-ui/react";
 
 const App: React.FC = () => {
 	return (
-		<Wrapper>
-			<h2>React Weather App</h2>
+		<Container>
+			<Text fontSize="2xl" fontWeight="700" marginBottom="1rem">
+				React Weather App
+			</Text>
 			<SearchBar />
 			<WeatherDisplay />
 			<ForcastedWeatherDisplay />
-		</Wrapper>
+		</Container>
 	);
 };
 
