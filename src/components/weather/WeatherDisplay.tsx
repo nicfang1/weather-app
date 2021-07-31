@@ -5,19 +5,26 @@ import { RootState } from "../../store/store";
 import WeatherCard from "./WeatherCard";
 
 const WeatherDisplayWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	background-color: white;
+	margin-top: 2rem;
+	border-radius: 2em;
+	padding: 1em 2em;
 `;
 
-const Time = styled.div`
-	font-size: 0.8rem;
+const Wrapper = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+`;
+
+const CurrentTempWrapper = styled.div`
+	display: flex;
+	align-items: center;
 `;
 
 const TempWrapper = styled.div`
 	display: flex;
 	justify-content: space-evenly;
+	flex-direction: column;
 `;
 
 const WeatherDisplay: React.FC = () => {
@@ -27,41 +34,39 @@ const WeatherDisplay: React.FC = () => {
 	let iconPath;
 	iconPath = `http://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`;
 
-	const date = new Date().toLocaleDateString("en-US", {
-		day: "numeric",
-		month: "long",
-		year: "numeric",
-	});
-
-	const time = new Date().toLocaleTimeString("en-US");
-
-	console.log(date);
-	console.log(time);
-
 	if (weatherData.name === "") {
 		return <div></div>;
 	}
 
 	return (
 		<WeatherDisplayWrapper>
-			<img src={iconPath} alt={weatherData?.name} />
-			<h2>{weatherData?.name}</h2>
-			<Time>{`${date} | ${time}`}</Time>
-			<p>{weatherData?.weather[0].description}</p>
-			<TempWrapper>
-				<WeatherCard
-					title="Lowest Temperature"
-					temp={weatherData?.main.temp_min}
-				/>
-				<WeatherCard
-					title="Current Temperature"
-					temp={weatherData?.main.temp}
-				/>
-				<WeatherCard
-					title="Highest Temperature"
-					temp={weatherData?.main.temp_max}
-				/>
-			</TempWrapper>
+			<div>
+				<h2>Current Weather</h2>
+			</div>
+			<Wrapper>
+				<div>
+					<h2>{weatherData?.name}</h2>
+					<CurrentTempWrapper>
+						<img src={iconPath} alt={weatherData?.name} />
+						<h3>{weatherData.main.temp}</h3>
+					</CurrentTempWrapper>
+					<p>{weatherData?.weather[0].description}</p>
+				</div>
+				<TempWrapper>
+					<WeatherCard
+						title="Lowest Temperature"
+						temp={weatherData?.main.temp_min}
+					/>
+					<WeatherCard
+						title="Current Temperature"
+						temp={weatherData?.main.temp}
+					/>
+					<WeatherCard
+						title="Highest Temperature"
+						temp={weatherData?.main.temp_max}
+					/>
+				</TempWrapper>
+			</Wrapper>
 		</WeatherDisplayWrapper>
 	);
 };
