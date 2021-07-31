@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../store/store";
-import WeatherCard from "./WeatherCard";
+import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 
 const WeatherDisplayWrapper = styled.div`
 	background-color: white;
@@ -19,11 +19,11 @@ const Wrapper = styled.div`
 const CurrentTempWrapper = styled.div`
 	display: flex;
 	align-items: center;
+	gap: 1em;
 `;
 
 const TempWrapper = styled.div`
 	display: flex;
-	justify-content: space-evenly;
 	flex-direction: column;
 `;
 
@@ -53,18 +53,19 @@ const WeatherDisplay: React.FC = () => {
 					<p>{weatherData?.weather[0].description}</p>
 				</div>
 				<TempWrapper>
-					<WeatherCard
-						title="Lowest Temperature"
-						temp={weatherData?.main.temp_min}
-					/>
-					<WeatherCard
-						title="Current Temperature"
-						temp={weatherData?.main.temp}
-					/>
-					<WeatherCard
-						title="Highest Temperature"
-						temp={weatherData?.main.temp_max}
-					/>
+					<h3>Feels like {weatherData.main.feels_like}</h3>
+					<CurrentTempWrapper>
+						<CurrentTempWrapper>
+							<AiOutlineArrowUp />
+							<h3>{weatherData.main.temp_max}</h3>
+						</CurrentTempWrapper>
+						<CurrentTempWrapper>
+							<AiOutlineArrowDown />
+							<h3>{weatherData.main.temp_min}</h3>
+						</CurrentTempWrapper>
+					</CurrentTempWrapper>
+					<h4>Humidity {weatherData.main.humidity}</h4>
+					<h4>Pressure {weatherData.main.pressure}</h4>
 				</TempWrapper>
 			</Wrapper>
 		</WeatherDisplayWrapper>
