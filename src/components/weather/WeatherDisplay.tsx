@@ -6,6 +6,7 @@ import { convertToCelcius } from "../../store/tempUnitSlice";
 import WeatherDetails from "./WeatherDetails";
 import { iconPath } from "../../utils/icon-path";
 import { tempConverter } from "../../utils/temp-converter";
+import { Switch, FormControl, FormLabel } from "@chakra-ui/react";
 
 const WeatherDisplayWrapper = styled.div`
 	background-color: white;
@@ -55,13 +56,10 @@ const WeatherDisplay: React.FC = () => {
 		<WeatherDisplayWrapper>
 			<Header>
 				<h2>Current Weather</h2>
-				<button
-					onClick={() => {
-						dispath(convertToCelcius());
-					}}
-				>
-					{changeTemp ? "F" : "C"}
-				</button>
+				<FormControl>
+					<FormLabel htmlFor="tempUnit">Change Unit?</FormLabel>
+					<Switch onChange={() => dispath(convertToCelcius())} id="tempUnit" />
+				</FormControl>
 			</Header>
 			<Wrapper>
 				<TempWrapper>
