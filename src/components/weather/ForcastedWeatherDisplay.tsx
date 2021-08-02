@@ -1,4 +1,4 @@
-import { Container, Flex, HStack, SimpleGrid, Text } from "@chakra-ui/react";
+import { Container, HStack, Text } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -18,14 +18,14 @@ const ForcastedWeatherDisplay: React.FC = () => {
 			<Text fontSize="lg" fontWeight={700} marginBottom="0.5rem">
 				Forecasted Weather
 			</Text>
-			<Flex spacing={10} overflow="scroll">
+			<HStack overflow="scroll" spacing={10} align="flex-start" w="full">
 				{forcastedWeatherData.map((forcastedDate) => (
 					<ForcastedWeatherCard
 						forcastedDate={forcastedDate}
 						key={forcastedDate.id}
 					/>
 				))}
-			</Flex>
+			</HStack>
 		</Container>
 	);
 };

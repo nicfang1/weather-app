@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { TransformedForcastedData } from "../../interfaces/weather-interface";
@@ -13,7 +13,7 @@ const ForcastedWeatherCard: React.FC<Props> = ({ forcastedDate }) => {
 	const changeTemp = useSelector((state: RootState) => state.toCelcius.celcius);
 
 	return (
-		<Box w={256}>
+		<Flex flexDirection="column" align="center" w="min-content">
 			<Text>{forcastedDate.date}</Text>
 			<Text>{forcastedDate.time}</Text>
 			<img src={forcastedDate.icon} alt={forcastedDate.description} />
@@ -22,7 +22,7 @@ const ForcastedWeatherCard: React.FC<Props> = ({ forcastedDate }) => {
 				{changeTemp ? "°" : "K"}
 			</Text>
 			<Text>{forcastedDate.description}</Text>
-		</Box>
+		</Flex>
 	);
 };
 
